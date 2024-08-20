@@ -8,7 +8,7 @@ android {
     compileSdkVersion 34
 
     defaultConfig {
-        applicationId "net.christianbeier.droidvnc_ng"
+        applicationId "net.christianbeier.droidvnc_ng.nolo"
         minSdkVersion 24
         targetSdkVersion 34
         versionCode 35
@@ -33,6 +33,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        outputFileName = "VNC-V${defaultConfig.versionName}.apk"
+                    }
+                }
+            }
         }
     }
 
